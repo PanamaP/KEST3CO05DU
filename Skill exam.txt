@@ -1,0 +1,125 @@
+CyberOps Associates v1.0 - Skills Assessment
+	Introduction
+You have been hired as a junior security analyst. As part of your training, you were tasked to determine any malicious activity associated with the Pushdo trojan.
+You will have access to the internet to learn more about the events. You can use websites, such as VirusTotal, to upload and verify threat existence. 
+The tasks below are designed to provide some guidance through the analysis process.
+You will practice and be assessed on the following skills:
+o	Evaluate event alerts using Squil and Kibana.
+o	Use Google search as a tool to obtain intelligence on a potential exploit.
+o	Use VirusTotal to upload and verify threat existence.
+Content for this assessment was obtained from http://www.malware-traffic-analysis.net/ and is used with permission. We are grateful for the use of this material.
+Required Resources
+•	Host computer with at least 8GB of RAM and 45GB of free disk space
+•	Latest version of Oracle VirtualBox
+•	Security Onion virtual machine requires 4GB of RAM using 25GB disk space
+•	Internet access
+Instructions
+Part 1: Gather the Basic Information
+In this part, you will review the alerts listed in Security Onion VM and gather basic information for the interested time frame.
+Step 1: Verify the status of services
+a.	Log into Security Onion VM using with the username analyst and password cyberops.
+b.	Open a terminal window. Enter the sudo so-status command to verify that all the services are ready.
+c.	When the nsm service is ready, log into Sguil or Kibana with the username analyst and password cyberops.
+Step 2: Gather basic information.
+Questions:
+a.	Identify time frame of the Pushdo trojan attack, including the date and approximate time.
+
+13:38:34-13:44:32
+
+
+b.	List the alerts noted during this time frame associated with the trojan.
+
+
+ET POLICY PE EXE or DLL Windows file download HTTP
+ET POLICY PE EXE or DLL Windows file download HTTP
+ET POLICY PE EXE or DLL Windows file download HTTP
+ET TROJAN Pushdo.S CnC response
+ET CURRENT_EVENTS WinHttpRequest Downloading EXE
+ET POLICY External IP Lookup Domain(myip.opendns .com in DNS lookup)
+ET CURRENT_EVENTS Terse alphanumeric executable downloader high likelihood of being hostile
+ET POLICY TLS possible TOR SSL traffic
+ET TROJAN Backdoor.Win32.Pushdo.s Checkin
+
+
+c.	List the internal IP addresses and external IP addresses involved.
+Internal – 
+
+192.168.1.96  
+
+external - 
+
+143.95.151.192
+119.28.70.207
+145.131.10.21
+62.210.140.158
+119.28.70.207
+208.67.222.222
+208.83.223.34
+198.1.85.250
+
+
+
+Part 2: Learn about the Exploit
+In this part, you will learn more about the exploit.
+Step 1: Infected host
+Questions:
+a.	Based on the alerts, what is the IP and MAC addresses of the infected computer? Based on the MAC address, what is the vendor of the NIC chipset? (Hint: NetworkMiner or internet search)
+
+
+IP: 192.168.1.96
+MAC: 0015C5DEC73B
+NIC: Dell Inc.
+
+
+b.	Based on the alerts, when (date and time in UTC) and how was the PC infected? (Hint: Enter the command date in the terminal to determine the time zone for the displayed time)
+
+13:38:32
+
+
+How did the malware infect the PC? Use an internet search as necessary.
+
+
+Notandi tengdist sýktri síðu sem hefur samband við malicious dns serverin og niðurhalar Pushdo trojan sem síðan niðurhalar malware. 
+Pushdo er trojan sem þýðir að hann smyglar sér inn og niðurhalar.
+
+
+Step 2: Examine the exploit.
+Questions:
+a.	Based on the alerts associated with HTTP GET request, what files were downloaded? List the malicious domains observed and the files downloaded.
+
+File		Host domain
+gerv.gun	matied.com
+trow.exe	lounge-haarstudio.nl/oud
+wp.exe		vantagepointtechnologies.com
+
+
+Use any available tools in Security Onion VM, determine and record the SHA256 hash for the downloaded files that probably infected the computer?
+Gerv.gun –
+trow.exe -
+wp.exe -
+
+Get ekki notað copy paste á milli virtualbox og host en ég sótti SHA256 af fileunum í gegnum network miner.
+
+
+b.	Navigate to www.virustotal.com input the SHA256 hash to determine if these were detected as malicious files. Record your findings, such as file type and size, other names, and target machine. You can also include any information that is provided by the community posted in VirusTotal.
+
+
+Gerv.gun – 59/69 detected - Win32 EXE – 236.00KB – gerv.gun, test, tmp523799.697, tmp246975.343, tmp213582.420, extract-1498570714.111294-HTTP-FG0jno3bJLilzR4hrh.exe, 0931537889c35226d00ed26962ecacb140521394279eb2ade7e9d2adc1a7272.bin, vector.tui – intel 386 or later
+
+Trow.exe – 60/69 detected – Win32 EXE – 323.00KB – Pedals, Pedals.exe, trow.exe, test3, 2017-06-28_18-18-14.exe, bma2beo4.exe – intel 386 or later
+
+wp.exe – 56/69 detected – Win32 EXE – 300.50KB – wp.exe, test2, test_3, 4da48f6423d5f7d75de281a674c2e620.virobj, wp.exe.x-msdownload – intel 386 or later
+
+
+c.	Examine other alerts associated with the infected host during this timeframe and record your findings
+
+
+ET POLICY External IP lookup Domain, sendi dns pakka á malicious dns server.
+
+
+Step 3: Report Your Findings
+Summarizes your findings based on the information you have gathered from the previous parts, summarize your findings.
+
+
+Fann þrjú files sem Pushdo trojan downloadaði á tölvu notanda svo senti Pushdo skilaboð á Pushdo serverin um að það væri komið í gegn.
+
